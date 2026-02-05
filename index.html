@@ -1,17 +1,757 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gabriel Doce Panta | Portfólio Profissional - Eletricista Industrial</title>
-    <meta name="description" content="Portfólio profissional de Gabriel Doce Panta - Eletricista Industrial Pleno, Técnico em Eletrotécnica e Estudante de Engenharia Elétrica. Especialista em manutenção industrial, automação e confiabilidade." />
-    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriel Doce Panta — Portfólio Profissional</title>
+
+<style>
+/* MINI JANELAS DE PROJETOS (VISÃO GERAL) */
+.project-mini {
+  font-size: 13.5px;
+  padding: 14px;
+}
+
+.project-thumb-mini {
+  width: 100%;
+  height: 360px; /* você pode aumentar ou diminuir */
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.mini-carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.mini-carousel-controls button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.mini-carousel-controls button:hover {
+  transform: scale(1.1);
+}
+
+.mini-carousel-controls span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.project-card-mini {
+  font-size: 14px;
+}
+
+.project-thumb {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* CARDS DETALHADOS (ABAIXO DAS MINI JANELAS) */
+.detailed-card {
+  margin-top: 30px;
+}
+:root {
+  --bg: #050816;
+  --bg2: #0b1220;
+  --card: #111827;
+  --primary: #2f80ff;
+  --primary-soft: rgba(47,128,255,0.2);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: rgba(255,255,255,0.06);
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Inter, Arial, sans-serif;
+  background: radial-gradient(circle at top, #1f2937, var(--bg));
+  color: var(--text);
+}
+
+/* NAVBAR */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(5,8,22,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 16px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(180deg, rgba(47,128,255,0.18), transparent);
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid rgba(47,128,255,0.8);
+  box-shadow: 0 0 32px rgba(47,128,255,0.45);
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-size: 30px;
+  margin-bottom: 4px;
+}
+
+header p {
+  color: var(--muted);
+  margin: 3px 0;
+}
+
+/* BOTÕES CONTATO */
+.buttons {
+  margin-top: 18px;
+}
+
+.buttons a {
+  display: inline-block;
+  margin: 6px;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #2f80ff, #1b5fe0);
+  color: white;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  transition: 0.18s ease;
+  box-shadow: 0 4px 18px rgba(47,128,255,0.4);
+}
+
+.buttons a:hover {
+  transform: translateY(-1px) scale(1.03);
+}
+
+/* LAYOUT GERAL */
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 16px 18px 40px;
+}
+
+.section {
+  margin: 40px 0;
+}
+
+.section h2 {
+  font-size: 21px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* BADGES */
+.badge {
+  display: inline-block;
+  padding: 7px 12px;
+  margin: 5px 6px 0 0;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: #93c5fd;
+  font-size: 13px;
+}
+
+/* LISTAS */
+.card ul {
+  padding-left: 18px;
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.card h3 {
+  margin-bottom: 6px;
+}
+
+/* CARROSSEL GENÉRICO */
+.carousel-container {
+  width: 100%;
+  text-align: center;
+}
+
+.carousel-img {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.carousel-controls button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.carousel-controls button:hover {
+  transform: scale(1.08);
+}
+
+.carousel-controls span {
+  font-weight: 500;
+}
+
+/* ANIMAÇÃO SUAVE */
+.fade {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.5s ease;
+}
+
+.fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  background: rgba(5,8,22,0.9);
+}
+
+/* RESPONSIVO */
+@media (max-width: 640px) {
+  header {
+    padding-top: 40px;
+  }
+  header h1 {
+    font-size: 24px;
+  }
+  .nav-links {
+    display: none; /* simplificar no mobile */
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">Gabriel Doce Panta</div>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#formacao">Formação</a>
+      <a href="#competencias">Competências</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <img src="foto.jpg" class="profile-pic" alt="Foto de Gabriel Doce Panta">
+
+  <h1>Gabriel Doce Panta</h1>
+  <p>Eletricista Industrial Pleno • Técnico em Eletrotécnica • Estudante de Engenharia Elétrica</p>
+  <p>Brasil • Disponível para viagens • CIR Atualizada</p>
+
+  <div class="buttons">
+    <a href="https://wa.me/5569993255892" target="_blank">💬 WhatsApp</a>
+    <a href="mailto:gabrieldocepanta@gmail.com">✉️ E-mail</a>
+    <a href="https://www.linkedin.com/in/gabriel-doce-375632192" target="_blank">🔗 LinkedIn</a>
+    <a href="Gabriel-Doce-Panta-CV.pdf" target="_blank">📄 Baixar Currículo (PDF)</a>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section fade">
+    <h2>Sobre Mim</h2>
+    <div class="card">
+      Técnico em Eletrotécnica com experiência em manutenção elétrica industrial, automação,
+      sistemas eletromecânicos e suporte técnico em ambientes industriais e laboratoriais. Atuação com foco
+      em confiabilidade, análise de falhas, melhoria contínua e eficiência operacional, integrando
+      conhecimentos de elétrica, hidráulica, refrigeração científica, instrumentação e equipamentos biomédicos.
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section id="experiencia" class="section fade">
+    <h2>Experiência Profissional</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Eletricista Industrial Pleno — Fermap Etanol</h3>
+        <ul>
+          <li>Manutenção preventiva e corretiva em motores elétricos, painéis e sistemas de potência.</li>
+          <li>Diagnóstico e suporte em inversores de frequência, soft starters e CLPs.</li>
+          <li>Participação em projetos de automação industrial e eficiência energética.</li>
+          <li>Atuação focada em redução de falhas e paradas não programadas.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Técnico em Eletrotécnica — AGC Serviços (Fiocruz/RO)</h3>
+        <p style="margin-bottom:8px;">Atuação em ambiente laboratorial e de pesquisa, envolvendo:</p>
+        <ul>
+          <li>Infraestrutura elétrica (baixa tensão / laboratórios).</li>
+          <li>Equipamentos biomédicos e de pesquisa.</li>
+          <li>Sistemas eletromecânicos.</li>
+          <li>Refrigeração científica.</li>
+          <li>Metrologia e instrumentação.</li>
+          <li>Gestão de manutenção e confiabilidade.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Técnico de Projetos — Satel Brasil</h3>
+        <ul>
+          <li>Elaboração e revisão de diagramas unifilares.</li>
+          <li>Cadastro e atualização de equipamentos em sistema GIS.</li>
+          <li>Apoio em projetos de subestações e linhas de transmissão.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJETOS & MANUTENÇÕES -->
+  <section id="projetos" class="section fade">
+  <h2>Projetos & Manutenções</h2>
+
+  <div class="grid">
+<div class="card project-mini">
+  <h3>Sistema: Automação / Eletrônica de Potência — Inversor WEG CFW300</h3>
+
+  <!-- Mídia (imagem/vídeo) -->
+  <div id="mediaWrapInversor" style="position:relative;">
+    <img id="carInversorMiniImg" class="project-thumb-mini" src="inversor1.jpg" alt="Reparo em placa do inversor">
+    <video id="carInversorMiniVid" class="project-thumb-mini" style="display:none;" controls>
+      <source src="inversor.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+  </div>
+
+  <div class="mini-carousel-controls">
+    <button id="prevInversorMini">◀</button>
+    <span id="labelInversorMini">1/3</span>
+    <button id="nextInversorMini">▶</button>
+  </div>
+
+  <ul style="margin-top:8px;">
+    <li>Reparo eletrônico: substituição de varistores (MOV) danificados</li>
+    <li>Recuperação de trilhas rompidas (jumper/ponte e reforço de cobre)</li>
+    <li>Inspeção/ressolda e verificação de curto em estágio de entrada</li>
+    <li>Teste funcional após reparo</li>
+  </ul>
+</div>
+
+    <div class="card project-mini">
+  <h3>Sistema: Energia — Gerador Diesel (Fiocruz/RO)</h3>
+
+  <img id="carGeradorMini" class="project-thumb-mini" src="gerador1.jpg">
+
+  <div class="mini-carousel-controls">
+    <button id="prevGeradorMini">◀</button>
+    <span id="labelGeradorMini">1/2</span>
+    <button id="nextGeradorMini">▶</button>
+  </div>
+
+  <ul style="margin-top:8px;">
+    <li>Manutenção preventiva</li>
+    <li>Troca de filtros</li>
+    <li>Limpeza interna</li>
+    <li>Teste operacional sob carga</li>
+  </ul>
+</div>
+
+    <!-- MINI JANELA: SISTEMA ELÉTRICO -->
+    <div class="card project-mini">
+      <h3>Sistema: Elétrico — Painel de distribuição</h3>
+      <img id="carPainelMini" class="project-thumb-mini" src="painel-antes.jpg">
+
+      <div class="mini-carousel-controls">
+        <button id="prevPainelMini">◀</button>
+        <span id="labelPainelMini">ANTES</span>
+        <button id="nextPainelMini">▶</button>
+      </div>
+
+      <ul style="margin-top:8px;">
+        <li>Organização de quadro elétrico</li>
+        <li>Identificação de circuitos</li>
+        <li>Adequação de proteção</li>
+      </ul>
+    </div>
+
+    <!-- MINI JANELA: SISTEMA HIDRÁULICO -->
+    <div class="card project-mini">
+      <h3>Sistema: Hidráulico — Autoclave Phoenix (Fiocruz/RO)</h3>
+      <img id="carFiocruzMini" class="project-thumb-mini" src="fiocruz1.jpg">
+
+      <div class="mini-carousel-controls">
+        <button id="prevFiocruzMini">◀</button>
+        <span id="labelFiocruzMini">1/6</span>
+        <button id="nextFiocruzMini">▶</button>
+      </div>
+
+      <ul style="margin-top:8px;">
+        <li>Substituição de válvula de retenção</li>
+        <li>Correção de contrafluxo térmico</li>
+        <li>Validação pós-intervenção</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+  <!-- FORMAÇÃO -->
+  <section id="formacao" class="section fade">
+    <h2>Formação Acadêmica</h2>
+    <div class="grid">
+      <div class="card">Engenharia Elétrica — UNOPAR (Cursando)</div>
+      <div class="card">Gestão de Produção Industrial — UNICV (Cursando)</div>
+      <div class="card">Técnico em Eletrotécnica — SENAI CETEM</div>
+      <div class="card">Técnico em Automação Industrial — UNICORP</div>
+    </div>
+  </section>
+
+  <!-- COMPETÊNCIAS -->
+  <section id="competencias" class="section fade">
+    <h2>Competências Técnicas & Comportamentais</h2>
+    <div class="card">
+      <p style="margin-bottom:10px; font-weight:500;">Técnicas</p>
+      <div>
+        <span class="badge">Manutenção Elétrica Industrial</span>
+        <span class="badge">Automação Industrial</span>
+        <span class="badge">CLPs</span>
+        <span class="badge">Inversores de Frequência</span>
+        <span class="badge">Soft Starters</span>
+        <span class="badge">Instrumentação</span>
+        <span class="badge">Sistemas Hidráulicos</span>
+        <span class="badge">Refrigeração Científica</span>
+        <span class="badge">Equipamentos Biomédicos</span>
+        <span class="badge">Análise de Falhas</span>
+        <span class="badge">Confiabilidade</span>
+        <span class="badge">Power BI</span>
+        <span class="badge">Excel Avançado</span>
+        <span class="badge">Python</span>
+      </div>
+
+      <p style="margin:16px 0 6px; font-weight:500;">Comportamentais</p>
+      <ul>
+        <li>Proatividade e senso de responsabilidade.</li>
+        <li>Organização e foco em resultados.</li>
+        <li>Facilidade de aprendizado e adaptação.</li>
+        <li>Trabalho em equipe e boa comunicação.</li>
+        <li>Compromisso com normas de segurança e qualidade.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section fade">
+    <h2>Contato</h2>
+    <div class="card">
+      <p>E-mail: <a href="mailto:gabrieldocepanta@gmail.com" style="color:#93c5fd; text-decoration:none;">gabrieldocepanta@gmail.com</a></p>
+      <p>WhatsApp: <a href="https://wa.me/5569993255892" target="_blank" style="color:#93c5fd; text-decoration:none;">(69) 99325-5892</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/gabriel-doce-375632192" target="_blank" style="color:#93c5fd; text-decoration:none;">/in/gabriel-doce-375632192</a></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  © 2026 — Gabriel Doce Panta • Portfólio Profissional
+</footer>
+
+<script>
+// animação de aparecer no scroll
+const fades = document.querySelectorAll('.fade');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+fades.forEach(el => observer.observe(el));
+
+// CARROSSEL PAINEL (2 IMAGENS: ANTES / DEPOIS)
+const imagensPainel = [
+  { src: "painel-antes.jpg", label: "ANTES" },
+  { src: "painel-depois.jpg", label: "DEPOIS" }
+];
+
+let idxPainel = 0;
+const imgPainel = document.getElementById("carPainel");
+const labelPainel = document.getElementById("labelPainel");
+
+function atualizaPainel() {
+  imgPainel.src = imagensPainel[idxPainel].src;
+  labelPainel.textContent = imagensPainel[idxPainel].label;
+}
+
+document.getElementById("prevPainel").onclick = () => {
+  idxPainel = (idxPainel - 1 + imagensPainel.length) % imagensPainel.length;
+  atualizaPainel();
+};
+document.getElementById("nextPainel").onclick = () => {
+  idxPainel = (idxPainel + 1) % imagensPainel.length;
+  atualizaPainel();
+};
+atualizaPainel();
+
+// CARROSSEL FIOCRUZ (AUTÓCLAVE)
+const imgsFiocruz = [
+  "fiocruz1.jpg",
+  "fiocruz2.jpg",
+  "fiocruz3.jpg",
+  "fiocruz4.jpg",
+  "fiocruz5.jpg",
+  "fiocruz6.jpg"
+];
+
+let idxFiocruz = 0;
+const imgFiocruz = document.getElementById("carFiocruz");
+const labelFiocruz = document.getElementById("labelFiocruz");
+
+function atualizaFiocruz() {
+  imgFiocruz.src = imgsFiocruz[idxFiocruz];
+  labelFiocruz.textContent = `${idxFiocruz + 1}/${imgsFiocruz.length}`;
+}
+
+document.getElementById("prevFiocruz").onclick = () => {
+  idxFiocruz = (idxFiocruz - 1 + imgsFiocruz.length) % imgsFiocruz.length;
+  atualizaFiocruz();
+};
+document.getElementById("nextFiocruz").onclick = () => {
+  idxFiocruz = (idxFiocruz + 1) % imgsFiocruz.length;
+  atualizaFiocruz();
+};
+atualizaFiocruz();
+</script>
+<script>
+// MINI CARROSSEL — GERADOR DIESEL
+const imgsGeradorMini = [
+  "gerador1.jpg",
+  "gerador2.jpg"
+];
+
+let idxGeradorMini = 0;
+const imgGeradorMini = document.getElementById("carGeradorMini");
+const labelGeradorMini = document.getElementById("labelGeradorMini");
+
+document.getElementById("prevGeradorMini").onclick = () => {
+  idxGeradorMini = (idxGeradorMini - 1 + imgsGeradorMini.length) % imgsGeradorMini.length;
+  updateGeradorMini();
+};
+
+document.getElementById("nextGeradorMini").onclick = () => {
+  idxGeradorMini = (idxGeradorMini + 1) % imgsGeradorMini.length;
+  updateGeradorMini();
+};
+
+function updateGeradorMini() {
+  imgGeradorMini.src = imgsGeradorMini[idxGeradorMini];
+  labelGeradorMini.textContent = `${idxGeradorMini + 1}/${imgsGeradorMini.length}`;
+}
+
+updateGeradorMini();
+</script>
+<script>
+// MINI CARROSSEL — INVERSOR WEG CFW300 (IMAGEM + VÍDEO)
+const mediasInversorMini = [
+  { type: "img", src: "inversor1.jpg" },
+  { type: "img", src: "inversor2.jpg" },
+  { type: "video", src: "inversor.mp4" }
+];
+
+let idxInversorMini = 0;
+
+const imgInv = document.getElementById("carInversorMiniImg");
+const vidInv = document.getElementById("carInversorMiniVid");
+const labelInv = document.getElementById("labelInversorMini");
+
+document.getElementById("prevInversorMini").onclick = () => {
+  idxInversorMini = (idxInversorMini - 1 + mediasInversorMini.length) % mediasInversorMini.length;
+  updateInversorMini();
+};
+
+document.getElementById("nextInversorMini").onclick = () => {
+  idxInversorMini = (idxInversorMini + 1) % mediasInversorMini.length;
+  updateInversorMini();
+};
+
+function updateInversorMini() {
+  const item = mediasInversorMini[idxInversorMini];
+
+  // pausa vídeo ao trocar
+  try { vidInv.pause(); } catch(e) {}
+
+  if (item.type === "img") {
+    vidInv.style.display = "none";
+    imgInv.style.display = "block";
+    imgInv.src = item.src;
+  } else {
+    imgInv.style.display = "none";
+    vidInv.style.display = "block";
+    vidInv.querySelector("source").src = item.src;
+    vidInv.load();
+  }
+
+  labelInv.textContent = `${idxInversorMini + 1}/${mediasInversorMini.length}`;
+}
+
+updateInversorMini();
+</script>
+<div style="text-align:center; margin-top:40px;">
+  <a href="projetos.html" class="btn-secondary">
+    Ver projetos completos (TCC e estudos técnicos)
+  </a>
+</div>
+</body>
+<script>
+// MINI CARROSSEL PAINEL
+const imgsPainelMini = [
+  { src: "painel-antes.jpg", label: "ANTES" },
+  { src: "painel-depois.jpg", label: "DEPOIS" }
+];
+let idxPainelMini = 0;
+const imgPainelMini = document.getElementById("carPainelMini");
+const labelPainelMini = document.getElementById("labelPainelMini");
+document.getElementById("prevPainelMini").onclick = () => {
+  idxPainelMini = (idxPainelMini - 1 + imgsPainelMini.length) % imgsPainelMini.length;
+  updatePainelMini();
+};
+document.getElementById("nextPainelMini").onclick = () => {
+  idxPainelMini = (idxPainelMini + 1) % imgsPainelMini.length;
+  updatePainelMini();
+};
+function updatePainelMini() {
+  imgPainelMini.src = imgsPainelMini[idxPainelMini].src;
+  labelPainelMini.textContent = imgsPainelMini[idxPainelMini].label;
+}
+updatePainelMini();
+
+// MINI CARROSSEL AUTOCLAVE
+const imgsFiocruzMini = [
+  "fiocruz1.jpg",
+  "fiocruz2.jpg",
+  "fiocruz3.jpg",
+  "fiocruz4.jpg",
+  "fiocruz5.jpg",
+  "fiocruz6.jpg"
+];
+let idxFiocruzMini = 0;
+const imgFiocruzMini = document.getElementById("carFiocruzMini");
+const labelFiocruzMini = document.getElementById("labelFiocruzMini");
+document.getElementById("prevFiocruzMini").onclick = () => {
+  idxFiocruzMini = (idxFiocruzMini - 1 + imgsFiocruzMini.length) % imgsFiocruzMini.length;
+  updateFiocruzMini();
+};
+document.getElementById("nextFiocruzMini").onclick = () => {
+  idxFiocruzMini = (idxFiocruzMini + 1) % imgsFiocruzMini.length;
+  updateFiocruzMini();
+};
+function updateFiocruzMini() {
+  imgFiocruzMini.src = imgsFiocruzMini[idxFiocruzMini];
+  labelFiocruzMini.textContent = `${idxFiocruzMini + 1}/${imgsFiocruzMini.length}`;
+}
+updateFiocruzMini();
+</script>
 </html>
